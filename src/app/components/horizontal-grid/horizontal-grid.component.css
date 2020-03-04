@@ -1,0 +1,4 @@
+app-horizontal-grid {
+  display: flex;
+  overflow-x: auto;
+}

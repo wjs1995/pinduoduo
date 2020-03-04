@@ -1,0 +1,46 @@
+ImagesSliderComponent {}
+.container {
+  position: relative;
+  overflow: hidden;
+}
+
+.container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  scroll-snap-align: start;
+}
+
+.slide-button-select {
+  background-color: red!important;
+}
+
+.container .image-slider {
+  display: flex;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+}
+
+.nav-section {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  opacity: 0.5;
+  color: #ffffff;
+  background-color: black;
+  display: flex;
+  justify-content: flex-end;
+  align-items: stretch;
+}
+
+.nav-section .slide-button {
+  display: flex;
+  width: 10px;
+  height: 10px;
+  background-color: #ffffff;
+  text-decoration: none;
+  border-radius: 50%;
+  margin: 5px;
+}

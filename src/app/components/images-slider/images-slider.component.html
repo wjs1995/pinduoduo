@@ -1,0 +1,9 @@
+<div class="container" [ngStyle]="{'height': sliderHeight}">
+  <div class="image-slider" #imageSlider (scroll)="handleScroll($event)">
+    <img #img [src]="slider.imgUrl" [alt]="slider.caption" *ngFor="let slider of sliders; index as i">
+  </div>
+
+  <div class="nav-section">
+    <span class="slide-button" *ngFor="let _ of sliders; index as i" [ngClass]="{'slide-button-select': i === selectedIndex}"></span>
+  </div>
+</div>

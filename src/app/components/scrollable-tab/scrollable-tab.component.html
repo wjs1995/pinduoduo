@@ -1,0 +1,22 @@
+<ul [ngStyle]="{'background-color': backGroundColor}">
+        <li *ngFor="let item of menus; let i = index;" >
+          <a href="#" 
+          [class.active]="selected === i" 
+          (click)="handleSelection(i)"
+          >
+            {{item.title}}
+          </a>
+          <span class="indicator" *ngIf="selected === i"></span>
+      </li>
+      </ul>
+
+      <!-- <span>
+        <p>Object</p>
+        <div *ngFor="let item of object | keyvalue">
+          {{item.key}}:{{item.value}}
+        </div>
+        <p>Map</p>
+        <div *ngFor="let item of map | keyvalue">
+          {{item.key}}:{{item.value}}
+        </div>
+      </span> -->
