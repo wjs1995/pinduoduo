@@ -1,4 +1,23 @@
-app-horizontal-grid {
-  display: flex;
+/*app-horizontal-grid {*/
+/*  display: flex;*/
+/*  overflow-x: auto;*/
+/*}*/
+::-webkit-scrollbar {display:none}
+.container {
+  background-color: #ffffff;
+  padding: 5px 0;
   overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  display: grid;
+  place-content: stretch;
+  place-items: center;
+  grid-gap: 0.4rem;
+  /*多出来的按行显示*/
+  grid-auto-flow: row;
+}
+.highlight {
+  background-color: red;
+  height: 2px;
 }
