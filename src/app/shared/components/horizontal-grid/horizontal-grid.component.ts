@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
-import {Confirmable, Emoji} from '../../shared/decorator';
+import {Confirmable, Emoji} from '../../decorator';
 
 @Component({
   selector: 'app-horizontal-grid',
