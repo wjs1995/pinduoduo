@@ -1,5 +1,3 @@
 <app-scrollable-tab [menus]="tabMenus" (tabSelected)="handleTabSelected($event)"
                     backGroundColor='red'></app-scrollable-tab>
-<app-images-slider [sliders]="imageSliders" #imagesSlider></app-images-slider>
-<app-horizontal-grid></app-horizontal-grid>
-<app-storage #storageRef></app-storage>
+<router-outlet></router-outlet>
