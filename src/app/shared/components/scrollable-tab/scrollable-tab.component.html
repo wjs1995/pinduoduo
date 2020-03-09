@@ -1,7 +1,7 @@
-<ul [ngStyle]="{'background-color': backGroundColor}">
+<ul [ngStyle]="{'background-color': 'white'}">
         <li *ngFor="let item of menus; let i = index;" >
-          <a href="#" 
-          [class.active]="selected === i" 
+          <a
+          [class.active]="selected === i"
           (click)="handleSelection(i)"
           >
             {{item.title}}

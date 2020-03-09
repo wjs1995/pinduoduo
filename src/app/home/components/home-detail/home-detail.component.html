@@ -1,3 +1,13 @@
-<app-images-slider [sliders]="imageSliders" #imagesSlider></app-images-slider>
-<app-horizontal-grid></app-horizontal-grid>
-<app-storage #storageRef></app-storage>
+<div *ngIf="selected === 'hot'; else other">
+  <app-images-slider [sliders]="imageSliders" ></app-images-slider>
+  <app-horizontal-grid></app-horizontal-grid>
+<!--  <app-storage #storageRef></app-storage>-->
+</div>
+<ng-template #other>
+  没有
+</ng-template>
+<a [routerLink]="['grand' ]">link</a>
+<a [routerLink]="['grand' ]" [routerLinkActive]="'active'" [queryParams]="{'name': '张三'}">link</a>
+<a [routerLink]="[{outlets: {second: 'aux'}}]" >linkNma</a>
+<router-outlet></router-outlet>
+<router-outlet name="second"></router-outlet>

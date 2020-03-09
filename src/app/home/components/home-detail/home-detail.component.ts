@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ImageSlider} from '../../../shared/components/images-slider';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-home-detail',
@@ -36,11 +37,19 @@ export class HomeDetailComponent implements OnInit {
     // http://www.suntop168.com/blog/zb_users/upload/2014/2/adf89182.jpg
     //   http://img.zcool.cn/community/01590d55f24c656ac7251df8f4d0c1.jpg
   ];
+  selected: string;
 
-  constructor() {
+  constructor(private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe(params => {
+      console.log('路径参数', params);
+      this.selected = params.get('tabLink')
+    });
+    this.activatedRoute.queryParamMap.subscribe(params => {
+      console.log('查询参数', params)
+    })
   }
 
 }

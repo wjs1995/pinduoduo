@@ -3,11 +3,10 @@ import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 export interface TabsHeaderType {
   title?: string;
   href?: string;
+  id?: number;
 }
 
-interface Func {
-  (x?: number, y?: number): number
-}
+type Func = (x?: number, y?: number) => number
 
 @Component({
   selector: 'app-scrollable-tab',
@@ -33,7 +32,7 @@ export class ScrollableTabComponent implements OnInit {
 
   handleSelection(index: number) {
     this.selected = index;
-    this.tabSelected.emit(1);
+    this.tabSelected.emit(this.menus[index]);
     console.log(index);
   }
 

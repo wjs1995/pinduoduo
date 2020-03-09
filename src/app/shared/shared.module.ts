@@ -8,13 +8,14 @@ import {ScrollableTabComponent} from './components/scrollable-tab';
 import {ImagesSliderComponent} from './components/images-slider';
 import {StorageComponent} from '../test/storage/storage.component';
 import {HorizontalGridComponent} from './components/horizontal-grid';
+import {Router, RouterModule} from '@angular/router';
 
 
-const modules = [CommonModule];
+const modules = [CommonModule, RouterModule];
 const example = [MagicFrogComponent, GridItemDirective, GridItemImageDirective, GridItemTitleDirective, ScrollableTabComponent,
   ImagesSliderComponent,
   HorizontalGridComponent,
-  StorageComponent];
+  StorageComponent, RouterModule];
 
 @NgModule({
   declarations: [MagicFrogComponent, GridItemDirective, GridItemImageDirective, GridItemTitleDirective, ScrollableTabComponent,

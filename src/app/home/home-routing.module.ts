@@ -1,12 +1,14 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 import {SharedModule} from '../shared/shared.module';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeContainerComponent} from './components/home-container';
 import {HomeDetailComponent} from './components/home-detail';
+import {HomeGrandComponent} from './components/home-grand';
+import {HomeAuxComponent} from './components/home-aux';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'home',
     component: HomeContainerComponent,
     children: [
       {
@@ -16,7 +18,18 @@ const routes: Routes = [
       },
       {
         path: ':tabLink',
-        component: HomeDetailComponent
+        component: HomeDetailComponent,
+        children: [
+          {
+            path: 'aux',
+            component: HomeAuxComponent,
+            outlet: 'second'
+          },
+          {
+            path: 'grand',
+            component: HomeGrandComponent
+          }
+        ]
       }
     ]
   }
@@ -29,4 +42,5 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ]
 })
-export class HomeRoutingModule { }
+export class HomeRoutingModule {
+}
