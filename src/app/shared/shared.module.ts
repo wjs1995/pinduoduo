@@ -9,19 +9,22 @@ import {ImagesSliderComponent} from './components/images-slider';
 import {StorageComponent} from '../test/storage/storage.component';
 import {HorizontalGridComponent} from './components/horizontal-grid';
 import {Router, RouterModule} from '@angular/router';
+import {AgoPipe} from './pipes';
 
 
 const modules = [CommonModule, RouterModule];
 const example = [MagicFrogComponent, GridItemDirective, GridItemImageDirective, GridItemTitleDirective, ScrollableTabComponent,
   ImagesSliderComponent,
   HorizontalGridComponent,
-  StorageComponent, RouterModule];
+  StorageComponent, RouterModule,
+  AgoPipe];
 
 @NgModule({
   declarations: [MagicFrogComponent, GridItemDirective, GridItemImageDirective, GridItemTitleDirective, ScrollableTabComponent,
     ImagesSliderComponent,
     HorizontalGridComponent,
-    StorageComponent],
+    StorageComponent,
+    AgoPipe],
   imports: [
     ...modules
   ],
