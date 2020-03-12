@@ -43,18 +43,18 @@ export class HorizontalGridComponent implements OnInit {
 
   ngOnInit() {
     setInterval(() => {
-      console.log(this.sliderMargin);
+      // console.log(this.sliderMargin);
     }, 2000);
   }
 
   @Confirmable('您确认要执行吗？')
   ok() {
-    console.log(1111);
+    // console.log(1111);
   }
 
   handle(ev: any) {
-    console.log(ev, 'width');
-    console.log(ev.target.scrollLeft, 'left');
+    // console.log(ev, 'width');
+    // console.log(ev.target.scrollLeft, 'left');
     this.sliderMargin = `0 ${100 * ev.target.scrollLeft / ev.target.scrollWidth }%`;
   }
 }

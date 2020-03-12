@@ -1,6 +1,7 @@
 import {Component, OnInit, Input, ViewChild, ElementRef, ViewChildren, QueryList, AfterViewInit, Renderer2, OnDestroy} from '@angular/core';
 
 export interface ImageSlider {
+  id?: number,
   imgUrl: string;
   link: string;
   caption: string;
@@ -24,11 +25,11 @@ export class ImagesSliderComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
-    console.log(this.imageSlider);
+    // console.log(this.imageSlider);
   }
 
   ngAfterViewInit(): void {
-    console.log('ngAfterViewInit', this.images);
+    // console.log('ngAfterViewInit', this.images);
     this.images.forEach(item => {
       this.rd2.setStyle(item.nativeElement, 'height', '100px');
     });

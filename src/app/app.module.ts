@@ -7,6 +7,7 @@ import {RouterModule} from '@angular/router';
 import {AppRoutingModule} from './app-routing.module';
 import {HomeModule} from './home';
 import { NotFindComponent } from './components/not-find/not-find.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { NotFindComponent } from './components/not-find/not-find.component';
     SharedModule,
     HomeModule,
     AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   exports: [],

@@ -8,10 +8,12 @@ import {ScrollableTabComponent} from './components/scrollable-tab';
 import {ImagesSliderComponent} from './components/images-slider';
 import {StorageComponent} from '../test/storage/storage.component';
 import {HorizontalGridComponent} from './components/horizontal-grid';
-import {Router, RouterModule} from '@angular/router';
+import {RouterModule} from '@angular/router';
 import {AgoPipe} from './pipes';
+import {BrowserStorageService} from './service';
+import {token} from './service'
 
-
+const providers = [BrowserStorageService];
 const modules = [CommonModule, RouterModule];
 const example = [MagicFrogComponent, GridItemDirective, GridItemImageDirective, GridItemTitleDirective, ScrollableTabComponent,
   ImagesSliderComponent,
@@ -30,6 +32,13 @@ const example = [MagicFrogComponent, GridItemDirective, GridItemImageDirective, 
   ],
   exports: [
     ...example
+  ],
+  providers: [
+    ...providers,
+    {
+      provide: token,
+      useValue: 'http://localhost:dev'
+    }
   ]
 })
 

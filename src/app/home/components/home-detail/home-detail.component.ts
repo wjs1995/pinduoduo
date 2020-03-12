@@ -1,31 +1,16 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {ImageSlider} from '../../../shared/components/images-slider';
 import {ActivatedRoute} from '@angular/router';
+import {HomeService} from '../../../shared/service';
 
 @Component({
   selector: 'app-home-detail',
   templateUrl: './home-detail.component.html',
-  styleUrls: ['./home-detail.component.css']
+  styleUrls: ['./home-detail.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeDetailComponent implements OnInit {
   imageSliders: ImageSlider[] = [
-    {
-      // tslint:disable-next-line:max-line-length
-      imgUrl: 'http://img.zcool.cn/community/01ca3d5543f32f0000019ae985d373.jpg@1280w_1l_2o_100sh.png',
-      link: '12312',
-      caption: '12312312321'
-    },
-    {
-      // tslint:disable-next-line:max-line-length
-      imgUrl: 'http://img.zcool.cn/community/0183f556e8c7f632f875520f4a9cdf.jpg',
-      link: '12312',
-      caption: '12312312321'
-    }, {
-      // tslint:disable-next-line:max-line-length
-      imgUrl: 'http://www.suntop168.com/blog/zb_users/upload/2014/2/E034CA83.jpg',
-      link: '12312',
-      caption: '12312312321'
-    }
     // http://img.zcool.cn/community/01bbe858ce95e2a801219c772c5e75.jpg@1280w_1l_2o_100sh.jpg
     // http://img.zcool.cn/community/0132c05541bf0d000001e78ccf1258.jpg@1280w_1l_2o_100sh.jpg
     // http://img3.imgtn.bdimg.com/it/u=2125738828,1669408181&fm=26&gp=0.jpg
@@ -39,17 +24,28 @@ export class HomeDetailComponent implements OnInit {
   ];
   selected: string;
 
-  constructor(private activatedRoute: ActivatedRoute) {
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private service: HomeService,
+    private cd: ChangeDetectorRef
+    ) {
+    this.imageSliders = service.imageSliders;
   }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
-      console.log('路径参数', params);
-      this.selected = params.get('tabLink')
+      // console.log('路径参数', params);
+      this.selected = params.get('tabLink');
+      this.cd.markForCheck();
+      this.service.getBanners().subscribe(banners => {
+        this.imageSliders = banners;
+        console.log('banners', banners)
+      });
+      const arr = [];
     });
-    this.activatedRoute.queryParamMap.subscribe(params => {
-      console.log('查询参数', params)
-    })
+    // this.activatedRoute.queryParamMap.subscribe(params => {
+    //   // console.log('查询参数', params)
+    // });
   }
 
 }

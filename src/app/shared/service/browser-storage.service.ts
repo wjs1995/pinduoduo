@@ -1,4 +1,5 @@
 import {Inject, Injectable, InjectionToken} from '@angular/core';
+import {BehaviorSubject, Subject} from 'rxjs';
 
 export const BROWSER_STORAGE = new InjectionToken<Storage>('Browser Storage', {
   providedIn: 'root',
@@ -27,4 +28,9 @@ export class BrowserStorageService {
   clear() {
     this.storage.clear();
   }
+}
+
+export class Dao {
+  sub = new Subject();
+  bSub = new BehaviorSubject(0);
 }

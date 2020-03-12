@@ -8,8 +8,10 @@ import {CommonModule, registerLocaleData} from '@angular/common';
 import { HomeGrandComponent } from './components/home-grand';
 import { HomeAuxComponent } from './components/home-aux';
 import localZh from '@angular/common/locales/zh-Hans-HK';
+import { ParentComponent } from './components/parent/parent.component';
+import { ChildComponent } from './components/child/child.component';
 @NgModule({
-  declarations: [HomeContainerComponent, HomeDetailComponent, HomeGrandComponent, HomeAuxComponent],
+  declarations: [HomeContainerComponent, HomeDetailComponent, HomeGrandComponent, HomeAuxComponent, ParentComponent, ChildComponent],
   imports: [
     SharedModule,
     HomeRoutingModule,
