@@ -1,1 +1,4 @@
 <router-outlet></router-outlet>
+<app-footer
+  [selectIndex]="selectedIndex$ | async"
+  (selected)="change($event)"></app-footer>

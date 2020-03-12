@@ -7,8 +7,13 @@ import {NotFindComponent} from './components/not-find/not-find.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'home',
     component: HomeContainerComponent
+  },
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
   },
   {
     path: '**',
@@ -20,7 +25,7 @@ const routes: Routes = [
   declarations: [],
   imports: [
     SharedModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, {enableTracing: false})
   ],
   exports: [
   ]

@@ -1,5 +1,15 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {Confirmable, Emoji} from '../../decorator';
+import {HomeService} from '../../service';
+import {Observable} from 'rxjs';
+import {tap} from 'rxjs/operators';
+
+export interface Channel {
+  id: number;
+  title: string;
+  icon: string;
+  link: string;
+}
 
 @Component({
   selector: 'app-horizontal-grid',
@@ -9,8 +19,6 @@ import {Confirmable, Emoji} from '../../decorator';
 })
 export class HorizontalGridComponent implements OnInit {
   @Input() cols = 8;
-  // @Input() templateRows = 8;
-  // @Input() templateColumns = 5;
   @Input() displayCols = 5;
   @Emoji() result = 'hello';
   sliderMargin = '0';
@@ -27,18 +35,7 @@ export class HorizontalGridComponent implements OnInit {
     return `repeat(${this.cols}, calc((100vw - ${this.displayCols * 0.4}rem) / ${this.displayCols}))`;
   }
 
-  list: { key: string; value: string; title: string; }[] = [
-    {key: '1', value: '你好', title: ''},
-    {key: '1', value: '撒地方', title: '3'},
-    {key: '1', value: '阿斯顿', title: '3'},
-    {key: '1', value: '放到是', title: '3'},
-    {key: '1', value: '放到是', title: '3'},
-    {key: '1', value: '放到是', title: '3'},
-    {key: '1', value: '放到是', title: '3'},
-    {key: '1', value: '收到', title: '3'}
-  ];
-
-  constructor() {
+  constructor(private service: HomeService) {
   }
 
   ngOnInit() {
@@ -55,6 +52,6 @@ export class HorizontalGridComponent implements OnInit {
   handle(ev: any) {
     // console.log(ev, 'width');
     // console.log(ev.target.scrollLeft, 'left');
-    this.sliderMargin = `0 ${100 * ev.target.scrollLeft / ev.target.scrollWidth }%`;
+    this.sliderMargin = `0 ${100 * ev.target.scrollLeft / ev.target.scrollWidth}%`;
   }
 }

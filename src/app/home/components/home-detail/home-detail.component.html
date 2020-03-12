@@ -1,15 +1,20 @@
-<div *ngIf="selected === 'hot'; else other">
-  <app-images-slider [sliders]="imageSliders"></app-images-slider>
-  <app-horizontal-grid></app-horizontal-grid>
+<div *ngIf="(selected$ | async) === 'hot'; else other">
+  <app-images-slider [sliders]="imageSliders$ | async"></app-images-slider>
+  <app-horizontal-grid>
+    <div appGridItem *ngFor="let item of channels$ | async">
+      <img appGridItemImage="red" [src]="item.icon">
+      <span appGridItemTitle="black">{{item.title}}</span>
+    </div>
+  </app-horizontal-grid>
   <!--  <app-storage #storageRef></app-storage>-->
 </div>
 <ng-template #other>
   没有
 </ng-template>
-<a [routerLink]="['grand' ]" style="color: green;">linkGrand</a>
-<br>
-<a [routerLink]="['grand' ]" [routerLinkActive]="'active'" [queryParams]="{'name': '张三'}" style="color: red;">linkNameGrand</a>
-<br>
-<a [routerLink]="[{outlets: {second: 'aux'}}]" style="color: black;">linkName</a>
+<!--<a [routerLink]="['grand' ]" style="color: green;">linkGrand</a>-->
+<!--<br>-->
+<!--<a [routerLink]="['grand' ]" [routerLinkActive]="'active'" [queryParams]="{'name': '张三'}" style="color: red;">linkNameGrand</a>-->
+<!--<br>-->
+<!--<a [routerLink]="[{outlets: {second: 'aux'}}]" style="color: black;">linkName</a>-->
 <router-outlet></router-outlet>
-<router-outlet name="second"></router-outlet>
+<!--<router-outlet name="second"></router-outlet>-->

@@ -11,33 +11,65 @@ import {HorizontalGridComponent} from './components/horizontal-grid';
 import {RouterModule} from '@angular/router';
 import {AgoPipe} from './pipes';
 import {BrowserStorageService} from './service';
-import {token} from './service'
+import {token} from './service';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {NotificationInterceptor, ParamInterceptor} from './Interceptor';
+import { CountDownComponent } from './components/count-down/count-down.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 const providers = [BrowserStorageService];
 const modules = [CommonModule, RouterModule];
-const example = [MagicFrogComponent, GridItemDirective, GridItemImageDirective, GridItemTitleDirective, ScrollableTabComponent,
+const declarations = [
+  MagicFrogComponent,
+  GridItemDirective,
+  GridItemImageDirective,
+  GridItemTitleDirective,
+  ScrollableTabComponent,
   ImagesSliderComponent,
   HorizontalGridComponent,
-  StorageComponent, RouterModule,
+  StorageComponent,
+  AgoPipe,
+  CountDownComponent
+];
+const example = [MagicFrogComponent,
+  GridItemDirective,
+  GridItemImageDirective,
+  GridItemTitleDirective,
+  ScrollableTabComponent,
+  ImagesSliderComponent,
+  HorizontalGridComponent,
+  StorageComponent,
+  RouterModule,
+  CountDownComponent,
   AgoPipe];
 
 @NgModule({
-  declarations: [MagicFrogComponent, GridItemDirective, GridItemImageDirective, GridItemTitleDirective, ScrollableTabComponent,
-    ImagesSliderComponent,
-    HorizontalGridComponent,
-    StorageComponent,
-    AgoPipe],
+  declarations: [
+    ...declarations,
+    FooterComponent,
+  ],
   imports: [
     ...modules
   ],
   exports: [
-    ...example
+    ...example,
+    FooterComponent
   ],
   providers: [
     ...providers,
     {
       provide: token,
       useValue: 'http://localhost:dev'
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ParamInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: NotificationInterceptor,
+      multi: true
     }
   ]
 })

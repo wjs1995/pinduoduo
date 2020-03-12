@@ -2,9 +2,11 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ImageSlider, ImagesSliderComponent} from '../../../shared/components/images-slider';
 import {TabsHeaderType} from '../../../shared/components/scrollable-tab';
 import {Router} from '@angular/router';
-import {BehaviorSubject, Subject} from 'rxjs';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {Dao} from '../../../shared/service/browser-storage.service';
 import {HomeService} from '../../../shared/service';
+import {tap} from 'rxjs/operators';
+import {Channel} from '../../../shared/components/horizontal-grid';
 
 @Component({
   selector: 'app-home-container',
@@ -17,6 +19,7 @@ export class HomeContainerComponent implements OnInit {
   tabMenus: TabsHeaderType[] = [];
   title = '123123';
   dao = new Dao();
+  channels: Observable<Channel[]>;
 
   constructor(
     private router: Router,
@@ -29,10 +32,14 @@ export class HomeContainerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.homeService.getTabs().subscribe(p => {
-     this.tabMenus = p;
-     console.log(p)
-    })
+    this.homeService.getTabs()
+      .subscribe(p => {
+        this.tabMenus = p;
+        console.log(p);
+      });
+    this.channels = this.homeService.getChannels().pipe(
+      tap(p => console.log(p))
+    );
   }
 
 }

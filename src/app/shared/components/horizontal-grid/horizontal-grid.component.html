@@ -3,10 +3,7 @@
 'grid-template-columns': templateColumns}"
      (scroll)="handle($event)"
 >
-  <div appGridItem *ngFor="let item of list">
-    <div appGridItemImage="red" >{{item.title}}</div>
-    <span appGridItemTitle="black">{{item.value}}</span>
-  </div>
+<ng-content></ng-content>
 </div>
 <div class="underline" *ngIf="scrollable">
   <div class="highlight" [ngStyle]="{'margin': sliderMargin}"></div>

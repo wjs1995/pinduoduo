@@ -3,6 +3,7 @@ import {TabsHeaderType} from '../components/scrollable-tab';
 import {ImageSlider} from '../components/images-slider';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
+import {Channel} from '../components/horizontal-grid';
 export const token = new InjectionToken<string>('baseUrl');
 @Injectable({
   providedIn: 'root'
@@ -55,14 +56,14 @@ export class HomeService {
     console.log(baseUrl)
   }
   getBanners() {
-    return this.http.get<ImageSlider[]>(`${environment.baseUrl}/banners`, {params: {icode: environment.iCode}})
+    return this.http.get<ImageSlider[]>(`${environment.baseUrl}/banners`)
   }
 
   getChannels() {
-    return this.http.get(`${environment.baseUrl}/channels`, {params: {icode: environment.iCode}})
+    return this.http.get<Channel[]>(`${environment.baseUrl}/channels`)
   }
 
   getTabs() {
-    return this.http.get<TabsHeaderType[]>(`${environment.baseUrl}/tabs`, {params: {icode: environment.iCode}})
+    return this.http.get<TabsHeaderType[]>(`${environment.baseUrl}/tabs`)
   }
 }

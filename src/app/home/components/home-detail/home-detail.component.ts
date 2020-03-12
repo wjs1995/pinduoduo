@@ -2,6 +2,9 @@ import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@an
 import {ImageSlider} from '../../../shared/components/images-slider';
 import {ActivatedRoute} from '@angular/router';
 import {HomeService} from '../../../shared/service';
+import {filter, map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
+import {Channel} from '../../../shared/components/horizontal-grid';
 
 @Component({
   selector: 'app-home-detail',
@@ -10,7 +13,7 @@ import {HomeService} from '../../../shared/service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeDetailComponent implements OnInit {
-  imageSliders: ImageSlider[] = [
+  imageSliders$: Observable<ImageSlider[]>;
     // http://img.zcool.cn/community/01bbe858ce95e2a801219c772c5e75.jpg@1280w_1l_2o_100sh.jpg
     // http://img.zcool.cn/community/0132c05541bf0d000001e78ccf1258.jpg@1280w_1l_2o_100sh.jpg
     // http://img3.imgtn.bdimg.com/it/u=2125738828,1669408181&fm=26&gp=0.jpg
@@ -21,28 +24,26 @@ export class HomeDetailComponent implements OnInit {
     //   http://img2.imgtn.bdimg.com/it/u=3346411134,3689284566&fm=26&gp=0.jpg
     // http://www.suntop168.com/blog/zb_users/upload/2014/2/adf89182.jpg
     //   http://img.zcool.cn/community/01590d55f24c656ac7251df8f4d0c1.jpg
-  ];
-  selected: string;
+
+  selected$: Observable<string>;
+  channels$: Observable<Channel[]>;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private service: HomeService,
     private cd: ChangeDetectorRef
     ) {
-    this.imageSliders = service.imageSliders;
   }
 
   ngOnInit(): void {
-    this.activatedRoute.paramMap.subscribe(params => {
-      // console.log('路径参数', params);
-      this.selected = params.get('tabLink');
-      this.cd.markForCheck();
-      this.service.getBanners().subscribe(banners => {
-        this.imageSliders = banners;
-        console.log('banners', banners)
-      });
-      const arr = [];
-    });
+    this.selected$ = this.activatedRoute.paramMap
+      .pipe(
+        filter(p => p.has('tabLink')),
+        map(p => p.get('tabLink'))
+      );
+    this.cd.markForCheck();
+    this.imageSliders$ = this.service.getBanners();
+    this.channels$ = this.service.getChannels();
     // this.activatedRoute.queryParamMap.subscribe(params => {
     //   // console.log('查询参数', params)
     // });
