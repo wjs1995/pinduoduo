@@ -1,20 +1,20 @@
-<div *ngIf="(selected$ | async) === 'hot'; else other">
-  <app-images-slider [sliders]="imageSliders$ | async"></app-images-slider>
-  <app-horizontal-grid>
-    <div appGridItem *ngFor="let item of channels$ | async">
-      <img appGridItemImage="red" [src]="item.icon">
-      <span appGridItemTitle="black">{{item.title}}</span>
-    </div>
-  </app-horizontal-grid>
-  <!--  <app-storage #storageRef></app-storage>-->
+<ng-container *ngIf="(selected$ | async) as tab">
+  <ng-container *ngIf="tab === 'hot';">
+    <app-images-slider [sliders]="imageSliders$ | async"></app-images-slider>
+    <app-horizontal-grid>
+      <div appGridItem *ngFor="let item of channels$ | async">
+        <img appGridItemImage="red" [src]="item.icon">
+        <span appGridItemTitle="black">{{item.title}}</span>
+      </div>
+    </app-horizontal-grid>
+  </ng-container>
+</ng-container>
+<div class="ad-container" *ngIf="ad$ | async as ad">
+  <img [src]="ad.imageUrl" alt="" class="ad-image">
 </div>
-<ng-template #other>
-  没有
-</ng-template>
-<!--<a [routerLink]="['grand' ]" style="color: green;">linkGrand</a>-->
-<!--<br>-->
-<!--<a [routerLink]="['grand' ]" [routerLinkActive]="'active'" [queryParams]="{'name': '张三'}" style="color: red;">linkNameGrand</a>-->
-<!--<br>-->
-<!--<a [routerLink]="[{outlets: {second: 'aux'}}]" style="color: black;">linkName</a>-->
-<router-outlet></router-outlet>
-<!--<router-outlet name="second"></router-outlet>-->
+<app-vertical-grid [itemWidth]="'15rem'">
+  <app-product-card
+    [routerLink]="['/products', item.id]"
+    *ngFor="let item of product$ | async" [product]="item">
+  </app-product-card>
+</app-vertical-grid>

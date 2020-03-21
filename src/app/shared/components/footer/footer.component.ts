@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, DoCheck, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Channel} from '../horizontal-grid';
+import {Channel, TabItem} from '../horizontal-grid';
 
 @Component({
   selector: 'app-footer',
@@ -10,12 +10,37 @@ import {Channel} from '../horizontal-grid';
 export class FooterComponent implements OnInit, DoCheck {
   @Input() selectIndex = 0;
   @Output() selected = new EventEmitter();
-  tabList: Channel[] = [
-    {id: 1, title: '首页', icon: '1', link: 'home'},
-    {id: 1, title: '推荐', icon: '1', link: 'recommend'},
-    {id: 1, title: '分类', icon: '1', link: 'category'},
-    {id: 1, title: '聊天', icon: '1', link: 'chat'},
-    {id: 1, title: '个人中心', icon: '1', link: 'my'},
+  tabList: TabItem[] = [
+    {
+      title: '首页',
+      icon: '/assets/tabs/home.png',
+      link: 'home',
+      selectedIcon: '/assets/tabs/home_selected.png'
+    },
+    {
+      title: '推荐',
+      icon: '/assets/tabs/recommend.png',
+      link: 'recommend',
+      selectedIcon: '/assets/tabs/recommend_selected.png'
+    },
+    {
+      title: '分类',
+      icon: '/assets/tabs/category.png',
+      link: 'category',
+      selectedIcon: '/assets/tabs/category_selected.png'
+    },
+    {
+      title: '聊天',
+      icon: '/assets/tabs/chat.png',
+      link: 'chat',
+      selectedIcon: '/assets/tabs/chat_selected.png'
+    },
+    {
+      title: '个人中心',
+      icon: '/assets/tabs/my.png',
+      link: 'my',
+      selectedIcon: '/assets/tabs/my_selected.png'
+    }
   ];
   color: string;
 
@@ -32,6 +57,5 @@ export class FooterComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck(): void {
-    console.log(this.selectIndex)
   }
 }

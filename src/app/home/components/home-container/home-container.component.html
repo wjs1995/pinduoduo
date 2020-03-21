@@ -1,10 +1,13 @@
 <app-scrollable-tab
   [menus]="tabMenus"
   (tabSelected)="handleTabSelected($event)"
+  [selectedTabLink]="selectedTabLink$ | async"
   backGroundColor='red'>
   <div appGridItem *ngFor="let item of channels | async">
     <img appGridItemImage="red"  [src]="item.icon">
     <span appGridItemTitle="black">{{item.title}}</span>
   </div>
 </app-scrollable-tab>
-<router-outlet></router-outlet>
+<div class="main">
+  <router-outlet></router-outlet>
+</div>

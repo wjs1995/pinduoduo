@@ -3,6 +3,7 @@ import {TabsHeaderType} from './shared/components';
 import {Observable} from 'rxjs';
 import {NavigationEnd, Router} from '@angular/router';
 import {filter, map} from 'rxjs/operators';
+import {DialogService} from './dialog/services';
 
 @Component({
   selector: 'app-root',
@@ -12,14 +13,17 @@ import {filter, map} from 'rxjs/operators';
 export class AppComponent implements OnInit, AfterViewInit {
   selectedIndex$: Observable<number>;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private dialogService: DialogService
+  ) {
   }
 
   ngAfterViewInit(): void {
   }
 
   change(tab: TabsHeaderType) {
-   this.router.navigate([tab.link])
+    this.router.navigate([tab.link]);
   }
 
   ngOnInit(): void {
@@ -31,12 +35,16 @@ export class AppComponent implements OnInit, AfterViewInit {
           return arr.length > 1 ? arr[1] : 'home';
         }),
         map(p => {
-         return  this.getSelectedIndex(p)
+          return this.getSelectedIndex(p);
         })
       );
   }
 
   getSelectedIndex(tab: string) {
     return tab === 'recommend' ? 1 : tab === 'category' ? 2 : tab === 'chat' ? 3 : tab === 'my' ? 4 : 0;
+  }
+
+  removeDialog() {
+    this.dialogService.close();
   }
 }

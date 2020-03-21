@@ -15,6 +15,7 @@ export class GridItemTitleDirective implements OnInit {
 
   ngOnInit(): void {
     this.rd2.setStyle(this.el.nativeElement, 'color', this.appGridItemTitle);
+    this.rd2.setStyle(this.el.nativeElement, 'font-size', '0.6rem');
   }
 
 }

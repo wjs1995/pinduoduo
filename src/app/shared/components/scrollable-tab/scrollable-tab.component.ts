@@ -18,6 +18,7 @@ export class ScrollableTabComponent implements OnInit {
   @Input() backGroundColor = '#ffffff';
   @Input() menus: TabsHeaderType[] = [];
   @Output() tabSelected = new EventEmitter();
+  @Input() selectedTabLink: string;
   selected = -1;
 
   object: { [key: number]: string } = {2: 'foo', 1: 'bar'};

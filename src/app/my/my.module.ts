@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { MyContainerComponent } from './components/my-container';
+import {MyRoutingModule} from './my-routing.module';
+import {SharedModule} from '../shared/shared.module';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [MyContainerComponent],
   imports: [
-    CommonModule
+    MyRoutingModule,
+    SharedModule
   ]
 })
 export class MyModule { }

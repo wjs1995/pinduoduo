@@ -1,13 +1,18 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {LOCALE_ID, NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
 import {SharedModule} from './shared/shared.module';
 import {RouterModule} from '@angular/router';
 import {AppRoutingModule} from './app-routing.module';
 import {HomeModule} from './home';
-import { NotFindComponent } from './components/not-find/not-find.component';
+import {NotFindComponent} from './components/not-find';
 import {HttpClientModule} from '@angular/common/http';
+import {RecommendModule} from './recommend';
+import {MyModule} from './my/my.module';
+import {ProductModule} from './product';
+import {registerLocaleData} from '@angular/common';
+import localZh from '@angular/common/locales/zh-Hans';
 
 @NgModule({
   declarations: [
@@ -18,11 +23,21 @@ import {HttpClientModule} from '@angular/common/http';
     BrowserModule,
     SharedModule,
     HomeModule,
+    // RecommendModule,
+    // MyModule,
+    // ProductModule,
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [{
+    provide: LOCALE_ID,
+    useValue: 'zh-Hans'
+  }],
   exports: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor() {
+    registerLocaleData(localZh, 'zh');
+  }
+}

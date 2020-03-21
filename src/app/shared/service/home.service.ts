@@ -1,9 +1,10 @@
 import {Inject, Injectable, InjectionToken} from '@angular/core';
 import {TabsHeaderType} from '../components/scrollable-tab';
 import {ImageSlider} from '../components/images-slider';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {Channel} from '../components/horizontal-grid';
+import {Ad, Product} from '../domain';
 export const token = new InjectionToken<string>('baseUrl');
 @Injectable({
   providedIn: 'root'
@@ -65,5 +66,11 @@ export class HomeService {
 
   getTabs() {
     return this.http.get<TabsHeaderType[]>(`${environment.baseUrl}/tabs`)
+  }
+  getAdByTab(tab: string) {
+    return this.http.get<Ad[]>(`${environment.baseUrl}/ads`, {params: {categories_like: tab}})
+  }
+  getProductsByTab(tab: string) {
+    return this.http.get<Product[]>(`${environment.baseUrl}/products`, {params: {categories_like: tab}})
   }
 }

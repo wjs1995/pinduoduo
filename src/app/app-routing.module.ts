@@ -1,23 +1,36 @@
 import {NgModule} from '@angular/core';
 import {SharedModule} from './shared/shared.module';
 import {RouterModule, Routes} from '@angular/router';
-import {HomeContainerComponent} from './home/components/home-container';
-import {HomeModule} from './home';
-import {NotFindComponent} from './components/not-find/not-find.component';
 
 const routes: Routes = [
-  {
-    path: 'home',
-    component: HomeContainerComponent
-  },
   {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
   },
   {
+    path: 'my',
+    loadChildren: () => import('./my').then(m => m.MyModule)
+  },
+  {
+    path: 'recommend',
+    loadChildren: () => import('./recommend').then(m => m.RecommendModule)
+  },
+  {
+    path: 'chat',
+    loadChildren: () => import('./chat').then(m => m.ChatModule)
+  },
+  {
+    path: 'products',
+    loadChildren: () => import('./product').then(m => m.ProductModule)
+  },
+  {
+    path: 'orders',
+    loadChildren: () => import('./product').then(m => m.ProductModule)
+  },
+  {
     path: '**',
-    component: NotFindComponent
+    loadChildren: () => import('./components').then(c => c.NotFindModule)
   }
 ];
 
@@ -25,7 +38,8 @@ const routes: Routes = [
   declarations: [],
   imports: [
     SharedModule,
-    RouterModule.forRoot(routes, {enableTracing: false})
+
+    RouterModule.forRoot(routes, {enableTracing: true}),
   ],
   exports: [
   ]

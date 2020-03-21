@@ -15,7 +15,7 @@ export class GridItemImageDirective implements OnInit {
 
   ngOnInit(): void {
     this.rd2.setStyle(this.el.nativeElement, 'grid-area', 'image');
-    this.rd2.setStyle(this.el.nativeElement, 'background-color', this.color);
+    // this.rd2.setStyle(this.el.nativeElement, 'background-color', this.color);
     this.rd2.setStyle(this.el.nativeElement, 'height', '50px');
     this.rd2.setStyle(this.el.nativeElement, 'width', '50px');
   }

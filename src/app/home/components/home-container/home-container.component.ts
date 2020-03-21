@@ -1,11 +1,11 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ImageSlider, ImagesSliderComponent} from '../../../shared/components/images-slider';
 import {TabsHeaderType} from '../../../shared/components/scrollable-tab';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {Dao} from '../../../shared/service/browser-storage.service';
 import {HomeService} from '../../../shared/service';
-import {tap} from 'rxjs/operators';
+import {filter, map, tap} from 'rxjs/operators';
 import {Channel} from '../../../shared/components/horizontal-grid';
 
 @Component({
@@ -20,10 +20,12 @@ export class HomeContainerComponent implements OnInit {
   title = '123123';
   dao = new Dao();
   channels: Observable<Channel[]>;
+  selectedTabLink$: Observable<string>;
 
   constructor(
     private router: Router,
-    private homeService: HomeService) {
+    private homeService: HomeService,
+    private active: ActivatedRoute) {
   }
 
   handleTabSelected(tobMenu: TabsHeaderType) {
@@ -32,6 +34,10 @@ export class HomeContainerComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.selectedTabLink$ = this.active.firstChild.paramMap.pipe(
+      filter(f => f.has('tabLink')),
+      map(m => m.get('tabLink'))
+    )
     this.homeService.getTabs()
       .subscribe(p => {
         this.tabMenus = p;

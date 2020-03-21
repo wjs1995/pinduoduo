@@ -25,10 +25,14 @@ export class ImagesSliderComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
+
     // console.log(this.imageSlider);
   }
 
   ngAfterViewInit(): void {
+    // if (this.intervalId <= 0) {
+    //   return
+    // }
     // console.log('ngAfterViewInit', this.images);
     this.images.forEach(item => {
       this.rd2.setStyle(item.nativeElement, 'height', '100px');
@@ -41,7 +45,7 @@ export class ImagesSliderComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   getIndex(idx: number): number {
-    return idx >= 0 ? idx % this.sliders.length : this.sliders.length - Math.abs(idx) % this.sliders.length;
+    return idx >= 0 ? idx % this.sliders.length : ((this.sliders.length - Math.abs(idx)) % this.sliders.length);
   }
 
   handleScroll(ev) {

@@ -2,9 +2,10 @@ import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@an
 import {ImageSlider} from '../../../shared/components/images-slider';
 import {ActivatedRoute} from '@angular/router';
 import {HomeService} from '../../../shared/service';
-import {filter, map} from 'rxjs/operators';
+import {filter, map, switchMap, tap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {Channel} from '../../../shared/components/horizontal-grid';
+import {Ad, Product} from '../../../shared/domain';
 
 @Component({
   selector: 'app-home-detail',
@@ -27,6 +28,8 @@ export class HomeDetailComponent implements OnInit {
 
   selected$: Observable<string>;
   channels$: Observable<Channel[]>;
+  ad$: Observable<Ad>;
+  product$: Observable<Product[]>;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -44,6 +47,17 @@ export class HomeDetailComponent implements OnInit {
     this.cd.markForCheck();
     this.imageSliders$ = this.service.getBanners();
     this.channels$ = this.service.getChannels();
+    this.ad$ = this.selected$.pipe(
+      switchMap(tab => this.service.getAdByTab(tab)),
+      filter(ads => ads.length > 0),
+      map(ads => ads[0])
+    );
+    this.product$ = this.selected$.pipe(
+      switchMap(tab => this.service.getProductsByTab(tab)),
+      tap(t => {
+        console.log(t)
+      })
+    )
     // this.activatedRoute.queryParamMap.subscribe(params => {
     //   // console.log('查询参数', params)
     // });

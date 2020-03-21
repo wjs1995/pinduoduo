@@ -1,32 +1,23 @@
-import {LOCALE_ID, NgModule} from '@angular/core';
-import { HomeContainerComponent } from './components/home-container';
+import {NgModule} from '@angular/core';
+import {HomeContainerComponent} from './components/home-container';
 import {SharedModule} from '../shared/shared.module';
 import {HomeRoutingModule} from './home-routing.module';
-import { HomeDetailComponent } from './components/home-detail';
+import {HomeDetailComponent} from './components/home-detail';
 import {RouterModule} from '@angular/router';
-import {CommonModule, registerLocaleData} from '@angular/common';
-import { HomeGrandComponent } from './components/home-grand';
-import { HomeAuxComponent } from './components/home-aux';
-import localZh from '@angular/common/locales/zh-Hans-HK';
-import { ParentComponent } from './components/parent/parent.component';
-import { ChildComponent } from './components/child/child.component';
+import {HomeGrandComponent} from './components/home-grand';
+import {HomeAuxComponent} from './components/home-aux';
+import {ParentComponent} from './components/parent';
+import {ChildComponent} from './components/child';
+
 @NgModule({
   declarations: [HomeContainerComponent, HomeDetailComponent, HomeGrandComponent, HomeAuxComponent, ParentComponent, ChildComponent],
   imports: [
     SharedModule,
     HomeRoutingModule,
     RouterModule,
-    CommonModule,
   ],
-  providers: [
-    {
-      provide: LOCALE_ID,
-      useValue: 'zh-Hans'
-    }
-  ]
+  providers: []
 })
 export class HomeModule {
-  constructor() {
-    registerLocaleData(localZh, 'zh')
-  }
+
 }

@@ -1,6 +1,11 @@
 <app-horizontal-grid [cols]="5" [displayCols]="5">
   <div appGridItem *ngFor="let item of tabList; let i = index;">
-    <div appGridItemImage [color]="selectIndex === i ? 'red' : 'green'"  (click)="change(i)">{{i === selectIndex}}</div>
+    <img
+      appGridItemImage
+      (click)="change(i)"
+      [src]="selectIndex === i ? item.selectedIcon : item.icon"
+      alt="">
+    <!--    <div appGridItemImage [color]="selectIndex === i ? 'red' : 'green'"  (click)="change(i)">{{i === selectIndex}}</div>-->
     <span appGridItemTitle="black">{{item.title}}</span>
   </div>
 </app-horizontal-grid>

@@ -17,7 +17,21 @@
   /*多出来的按行显示*/
   grid-auto-flow: row;
 }
-.highlight {
-  background-color: red;
+/*我的*/
+/*.highlight {*/
+/*  background-color: red;*/
+/*  height: 2px;*/
+/*}*/
+/*源码得*/
+.underline {
+  width: 20%;
   height: 2px;
+  background-color: #f5f5f5;
+  margin: 0 auto;
+}
+.underline > .highlight {
+  width: 50%;
+  height: 2px;
+  background-color: #e02f29;
+  padding: 0;
 }

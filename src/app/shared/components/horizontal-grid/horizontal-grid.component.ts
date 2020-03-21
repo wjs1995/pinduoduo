@@ -10,7 +10,12 @@ export interface Channel {
   icon: string;
   link: string;
 }
-
+export interface TabItem {
+  title: string;
+  icon: string;
+  link: string;
+  selectedIcon: string;
+}
 @Component({
   selector: 'app-horizontal-grid',
   templateUrl: './horizontal-grid.component.html',
@@ -52,6 +57,6 @@ export class HorizontalGridComponent implements OnInit {
   handle(ev: any) {
     // console.log(ev, 'width');
     // console.log(ev.target.scrollLeft, 'left');
-    this.sliderMargin = `0 ${100 * ev.target.scrollLeft / ev.target.scrollWidth}%`;
+    this.sliderMargin = `0 ${(100 * ev.target.scrollLeft) / ev.target.scrollWidth}%`;
   }
 }
